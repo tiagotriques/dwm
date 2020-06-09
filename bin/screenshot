@@ -1,0 +1,11 @@
+#!/bin/sh
+tmp=$(mktemp /tmp/XXXXXXX.png)
+selection=$(hacksaw -s 2)
+shotgun -g "$selection" $tmp
+cat $tmp | xclip -t 'image/png' -selection clipboard
+filename=$(dmenu -p "Save as:" < /dev/null)
+if test "$filename"
+then
+	output="/tmp/$filename.png"
+	mv -v "$tmp" $output
+fi
