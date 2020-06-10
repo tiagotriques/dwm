@@ -30,7 +30,8 @@ static const Rule rules[] = {
 	/* class            , instance , title          , tags mask , isfloating , isterminal , noswallow , monitor */
 	{ "Gimp"            , NULL     , NULL           , 0         , 1          , 0          , 0         , -1 },
 	{ "Firefox"         , NULL     , NULL           , 0         , 0          , 0          , 0         , -1 },
-	{ "Alacritty"       , NULL     , NULL           , 0         , 0          , 0          , 1         , -1 },
+	{ "Alacritty"       , NULL     , NULL           , 0         , 0          , 1          , 1         , -1 },
+	{ "St"              , NULL     , NULL           , 0         , 0          , 1          , 0         , -1 },
 	{ NULL              , NULL     , "Event Tester" , 0         , 1          , 0          , 0         , -1 }, /* xev */
     { "TelegramDesktop" , NULL     , "Telegram"     , 1 << 8    , 0          , 0          , 0         , -1 }
 };
@@ -63,20 +64,20 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "alacritty", NULL };
+static const char *termcmd[]  = { "st", NULL };
 static const char *browsercmd[] = {"firefox", NULL };
-static const char *ncmpcppcmd[] = {"alacritty", "-e", "ncmpcpp", NULL };
+static const char *ncmpcppcmd[] = {"st", "-e", "ncmpcpp", NULL };
 static const char *printscreencmd[] = {"/usr/local/bin/screenshot", NULL };
 
 #include <X11/XF86keysym.h>
 
 static Key keys[] = {
 	/* modifier             key                         function        argument */
-    { 0,                    XF86XK_AudioMute,           spawn,          SHCMD("pamixer -t") },
-    { 0,                    XF86XK_AudioLowerVolume,    spawn,          SHCMD("pamixer -d 1") },
-    { 0,                    XF86XK_AudioRaiseVolume,    spawn,          SHCMD("pamixer -i 1") },
-    { 0,                    XF86XK_MonBrightnessUp,     spawn,          SHCMD("xbacklight -inc 10") },
-    { 0,                    XF86XK_MonBrightnessDown,   spawn,          SHCMD("xbacklight -dec 10") },
+    { 0,                    XF86XK_AudioMute,           spawn,          SHCMD("pamixer -t;pkill -$((34+12)) dwmblocks") },
+    { 0,                    XF86XK_AudioLowerVolume,    spawn,          SHCMD("pamixer -d 1;pkill -$((34+12)) dwmblocks") },
+    { 0,                    XF86XK_AudioRaiseVolume,    spawn,          SHCMD("pamixer -i 1;pkill -$((34+12)) dwmblocks") },
+    { 0,                    XF86XK_MonBrightnessUp,     spawn,          SHCMD("xbacklight -inc 10;pkill -$((34+11)) dwmblocks") },
+    { 0,                    XF86XK_MonBrightnessDown,   spawn,          SHCMD("xbacklight -dec 10;pkill -$((34+11)) dwmblocks") },
     { 0,                    XF86XK_AudioPlay,           spawn,          SHCMD("mpc toggle") },
     { 0,                    XF86XK_AudioNext,           spawn,          SHCMD("mpc next") },
     { 0,                    XF86XK_AudioPrev,           spawn,          SHCMD("mpc prev") },
