@@ -70,6 +70,7 @@ static const char *termnscmd[]  = { "st", "-t", "stns", NULL };
 static const char *browsercmd[] = {"firefox", NULL };
 static const char *ncmpcppcmd[] = {"st", "-e", "ncmpcpp", NULL };
 static const char *printscreencmd[] = {"/usr/local/bin/screenshot", NULL };
+static const char *lockcmd[] = {"slock", NULL};
 
 #include <X11/XF86keysym.h>
 
@@ -96,6 +97,7 @@ static Key keys[] = {
 	{ MODKEY,               XK_d,                       incnmaster,     {.i = -1 } },
 	{ MODKEY,               XK_h,                       setmfact,       {.f = -0.05} },
 	{ MODKEY,               XK_l,                       setmfact,       {.f = +0.05} },
+	{ MODKEY|ShiftMask,     XK_l,                       spawn,       	{.v = lockcmd } },
 	{ MODKEY|ShiftMask,     XK_Return,                  zoom,           {0} },
 	{ MODKEY,               XK_Tab,                     view,           {0} },
 	{ MODKEY|ShiftMask,     XK_q,                       killclient,     {0} },
