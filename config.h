@@ -30,10 +30,8 @@ static const Rule rules[] = {
 	/* class            , instance , title          , tags mask , isfloating , isterminal , noswallow , monitor */
 	{ "Gimp"            , NULL     , NULL           , 0         , 0          , 0          , 0         , -1 },
 	{ "Firefox"         , NULL     , NULL           , 1 << 0    , 0          , 0          , 0         , -1 },
-	{ "Alacritty"       , NULL     , NULL           , 0         , 0          , 0          , 0         , -1 },
 	{ "st"              , "st"     , "st"           , 0         , 0          , 1          , 0         , -1 },
-	{ NULL              , NULL     , "Event Tester" , 0         , 1          , 0          , 0         , -1 }, /* xev */
-	{ NULL              , NULL     , "stns"         , 0         , 0          , 0          , 0         , -1 }, /* xev */
+	{ NULL              , NULL     , "Event Tester" , 0         , 1          , 0          , 1         , -1 }, /* xev */
     { "TelegramDesktop" , NULL     , "Telegram"     , 1 << 8    , 0          , 0          , 0         , -1 }
 };
 
@@ -75,6 +73,7 @@ static const char *termnscmd[]      = { "st", "-t", "stns", NULL };
 #include <X11/XF86keysym.h>
 static Key keys[] = {
 	/* modifier             key                         function        argument */
+	{ 0,                    XF86XK_AudioMute,           spawn,          SHCMD("pamixer -t; pkill -$((34+12)) dwmblocks") },
 	{ 0,                    XF86XK_AudioMute,           spawn,          SHCMD("pamixer -t; pkill -$((34+12)) dwmblocks") },
 	{ 0,                    XF86XK_AudioLowerVolume,    spawn,          SHCMD("pamixer -d 5; pkill -$((34+12)) dwmblocks") },
 	{ 0,                    XF86XK_AudioRaiseVolume,    spawn,          SHCMD("pamixer -i 5; pkill -$((34+12)) dwmblocks") },
