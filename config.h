@@ -29,13 +29,14 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class            , instance , title          , tags mask , isfloating , isterminal , noswallow , monitor */
-	{ "Gimp"            , NULL     , NULL           , 0         , 0          , 0          , 0         , -1 },
-	{ "Firefox"         , NULL     , NULL           , 1 << 0    , 0          , 0          , 0         , -1 },
-	{ "st"              , "st"     , "st"           , 0         , 0          , 1          , 0         , -1 },
-	{ NULL              , NULL     , "Event Tester" , 0         , 1          , 0          , 1         , -1 }, /* xev */
-    { "TelegramDesktop" , NULL     , "Telegram"     , 1 << 8    , 0          , 0          , 0         , -1 },
-    { "feh" 			, "feh"    , "Album Art"    , 0    		, 1          , 0          , 0         , -1 }
+	/* class            , instance  , title          , tags mask , isfloating , isterminal , noswallow , monitor */
+	{ "Gimp"            , NULL      , NULL           , 0         , 0          , 0          , 0         , -1 },
+	{ "Firefox"         , NULL      , NULL           , 1 << 0    , 0          , 0          , 0         , -1 },
+	{ "st"              , "st"      , "st"           , 0         , 0          , 1          , 0         , -1 },
+	{ NULL              , NULL      , "Event Tester" , 0         , 1          , 0          , 1         , -1 }, /* xev */
+    { "TelegramDesktop" , NULL      , "Telegram"     , 1 << 8    , 0          , 0          , 0         , -1 },
+    { "feh" 			, "feh"     , "Album Art"    , 0     	 , 1          , 0          , 1         , -1 },
+    { NULL              , NULL      , "graphviz: "   , 0     	 , 0          , 0          , 1         , -1 }
 };
 
 /* layout(s) */
@@ -71,7 +72,7 @@ static const char *lockcmd[]        = { "slock", NULL };
 static const char *ncmpcppcmd[]     = { "st", "-e", "ncmpcpp", NULL };
 static const char *printscreencmd[] = { "/usr/local/bin/screenshot", NULL };
 static const char *termcmd[]        = { "st", NULL };
-static const char *termnscmd[]      = { "st", "-t", "stns", NULL };
+static const char *albumartcmd[]    = { "/usr/local/bin/albumart", NULL };
 
 #include <X11/XF86keysym.h>
 static Key keys[] = {
@@ -88,9 +89,9 @@ static Key keys[] = {
 	{ 0,                    XK_Print,                   spawn,          {.v = printscreencmd} },
 	{ MODKEY,               XK_p,                       spawn,          {.v = dmenucmd} },
 	{ MODKEY,               XK_Return,                  spawn,          {.v = termcmd} },
-	{ ControlMask,          XK_Return,                  spawn,          {.v = termnscmd} },
 	{ MODKEY,               XK_w,                       spawn,          {.v = browsercmd} },
 	{ MODKEY,               XK_n,                       spawn,          {.v = ncmpcppcmd} },
+	{ MODKEY|ShiftMask,     XK_n,                       spawn,          {.v = albumartcmd} },
 	{ MODKEY,               XK_b,                       togglebar,      {0} },
 	{ MODKEY,               XK_j,                       focusstack,     {.i = +1} },
 	{ MODKEY,               XK_k,                       focusstack,     {.i = -1} },
